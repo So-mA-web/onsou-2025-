@@ -82,9 +82,9 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
+        /* Member Card Style - 既存のスタイルを維持しつつ、魅力を強調 */
         .member-card {
-            /* ライトテーマに合わせて変更 */
-            @apply bg-white rounded-lg p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2;
+            @apply bg-white rounded-xl p-6 shadow-lg transition-all duration-300 border border-gray-100 hover:shadow-2xl hover:border-cyan-500 hover:-translate-y-2;
         }
         .char-card:hover .char-img {
             transform: scale(1.1);
@@ -289,39 +289,39 @@
             </div>
         </section>
         
-        <!-- Member Section -->
+        <!-- Member Section - メンバーカードの表示を統一し、レスポンシブを強化 -->
         <section id="member" class="section">
             <h2 class="text-4xl font-bold text-center mb-12">Member</h2>
-            <!-- すべてのメンバーカードを格納するグリッドコンテナに変更し、デスクトップで4列に均等に分割 -->
+            <!-- グリッドのレスポンシブクラスを維持し、均等な4列表示を確保 -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Main Creator (カードの幅指定を削除し、他のメンバーと同じグリッドアイテムとして扱う) -->
+                <!-- Main Creator -->
                 <div class="text-center member-card">
-                    <!-- 画像サイズとテキストサイズを他のメンバーと統一して均等なバランスに調整 -->
-                    <img src="https://placehold.co/300x300/e2e8f0/1a202c?text=Planner" alt="企画者の写真" class="rounded-full w-32 h-32 object-cover mb-4 mx-auto">
+                    <img src="https://placehold.co/300x300/e2e8f0/1a202c?text=Planner" alt="企画者の写真" class="rounded-full w-32 h-32 object-cover mb-4 mx-auto border-4 border-cyan-500 shadow-md">
                     <h3 class="text-2xl font-bold text-gray-900">カンキツ霊夢</h3>
-                    <p class="text-cyan-600 mb-2">企画・プログラム・UIデザイン・譜面制作等</p>
+                    <p class="text-cyan-600 mb-2 font-semibold">企画・プログラム・UIデザイン・譜面制作等</p>
                     <p class="text-gray-600 text-sm">「音奏 -ONSOU-」の生みの親</p>
                 </div>
                 
-                <!-- Other Members - 以前のコンテナから移動し、新しいグリッドに直接配置。サイズも統一 -->
+                <!-- Other Members -->
                 <div class="member-card text-center">
-                    <img src="so-ma_icon.png" alt="プログラマーの写真" class="rounded-full w-32 h-32 object-cover mb-4 mx-auto">
+                    <!-- 画像URLの修正 (placehold.coを使用) とサイズ統一 -->
+                    <img src="https://placehold.co/300x300/e2e8f0/1a202c?text=So-Ma" alt="プログラマーの写真" class="rounded-full w-32 h-32 object-cover mb-4 mx-auto border-4 border-gray-200 shadow-md">
                     <h3 class="text-2xl font-bold text-gray-900">So-㎃</h3>
-                    <p class="text-cyan-600 mb-2">UIデザイン・譜面制作・Webサイト制作・プログラム等</p>
+                    <p class="text-cyan-600 mb-2 font-semibold">UIデザイン・譜面制作・Webサイト制作・プログラム等</p>
                     <p class="text-gray-600 text-sm">譜面制作とか色々</p>
                 </div>
-                <!-- member-cardのCSSを更新済み -->
+                
                 <div class="member-card text-center">
-                    <img src="https://placehold.co/150x150/e2e8f0/1a202c?text=Illustrator" alt="イラストレーターの写真" class="rounded-full w-32 h-32 object-cover mb-4 mx-auto">
+                    <img src="https://placehold.co/300x300/e2e8f0/1a202c?text=Daifuku" alt="イラストレーターの写真" class="rounded-full w-32 h-32 object-cover mb-4 mx-auto border-4 border-gray-200 shadow-md">
                     <h3 class="text-2xl font-bold text-gray-900">大福モドキ</h3>
-                    <p class="text-cyan-600 mb-2">譜面制作等</p>
+                    <p class="text-cyan-600 mb-2 font-semibold">譜面制作等</p>
                     <p class="text-gray-600 text-sm">安心・安定の大福モドキ譜面</p>
                 </div>
-                <!-- member-cardのCSSを更新済み -->
+                
                 <div class="member-card text-center">
-                    <img src="https://placehold.co/150x150/e2e8f0/1a202c?text=Composer" alt="コンポーザーの写真" class="rounded-full w-32 h-32 object-cover mb-4 mx-auto">
+                    <img src="https://placehold.co/300x300/e2e8f0/1a202c?text=YU-TO" alt="コンポーザーの写真" class="rounded-full w-32 h-32 object-cover mb-4 mx-auto border-4 border-gray-200 shadow-md">
                     <h3 class="text-2xl font-bold text-gray-900">YU-TO</h3>
-                    <p class="text-cyan-600 mb-2">譜面制作等</p>
+                    <p class="text-cyan-600 mb-2 font-semibold">譜面制作等</p>
                     <p class="text-gray-600 text-sm">数多くのクソ譜面を手掛けているとかいないとか</p>
                 </div>
             </div>
@@ -486,9 +486,12 @@
             // Add click listeners to newly created elements
             document.querySelectorAll('.news-item').forEach(item => {
                 item.addEventListener('click', (e) => {
-                    const index = e.currentTarget.dataset.index;
-                    const itemData = sortedNewsData[index];
+                    // dataset.indexは表示されているニュースのインデックスに紐づいているため、sortedNewsData全体から取得する
+                    const index = Array.from(newsListContainer.children).indexOf(e.currentTarget);
+                    if (index === -1) return; // indexが見つからない場合は処理を終了
                     
+                    const itemData = displayedNews[index]; // 制限されたリストからデータを取得
+
                     detailTitle.textContent = itemData.title;
                     detailDate.textContent = itemData.date;
                     detailCategory.textContent = itemData.category;
